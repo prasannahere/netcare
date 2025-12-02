@@ -4,7 +4,6 @@ import {
   FiUsers, 
   FiHome, 
   FiMapPin, 
-  FiGitBranch,
   FiLayers, 
   FiUserPlus, 
   FiClipboard, 
@@ -26,7 +25,6 @@ function Sidebar() {
     { icon: FiUsers, label: 'Patients', path: '/patients' },
     { icon: FiHome, label: 'Overview', path: '/' },
     { icon: FiMapPin, label: 'Map', path: '/' },
-    { icon: FiGitBranch, label: 'Flows', path: '/flows' },
     { icon: FiLayers, label: 'Departments', path: '/' },
     { icon: FiUserPlus, label: 'Doctors', path: '/' },
     { icon: FiClipboard, label: 'History', path: '/' },
@@ -34,9 +32,6 @@ function Sidebar() {
   ]
 
   const isActive = (item) => {
-    if (item.path === '/flows') {
-      return location.pathname.startsWith('/flows')
-    }
     if (item.path === '/patients') {
       return location.pathname === '/patients'
     }
@@ -79,7 +74,7 @@ function Sidebar() {
             <button
               key={item.label}
               onClick={() => {
-                if (item.label === 'Flows' || item.label === 'Patients') {
+                if (item.label === 'Patients') {
                   navigate(item.path)
                   setActiveItem(item.label)
                 } else if (item.label === 'Overview') {

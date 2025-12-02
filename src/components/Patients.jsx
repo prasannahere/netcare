@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiUser, FiCalendar, FiDollarSign, FiAlertCircle, FiActivity, FiCreditCard } from 'react-icons/fi'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import Toast from './Toast'
+import PatientDetailModal from './PatientDetailModal'
 import { mockRCMData } from '../data/mockRCMData'
 
 function Patients() {
   const navigate = useNavigate()
+  const [selectedPatient, setSelectedPatient] = useState(null)
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-ZA', {
@@ -60,6 +62,7 @@ function Patients() {
             {mockRCMData.map((patient, index) => (
               <div
                 key={index}
+                onClick={() => setSelectedPatient(patient)}
                 className="min-w-[380px] bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group"
               >
                 {/* Header */}
@@ -162,6 +165,14 @@ function Patients() {
           </div>
         </div>
       </div>
+      
+      {/* Patient Detail Modal */}
+      {selectedPatient && (
+        <PatientDetailModal
+          patient={selectedPatient}
+          onClose={() => setSelectedPatient(null)}
+        />
+      )}
     </div>
   )
 }
